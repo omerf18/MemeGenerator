@@ -1,0 +1,108 @@
+/* LAYOUT */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    max-width: 100vw;
+}
+
+/* SCREEN */
+
+.main-nav {
+    height: 10vh;
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* GALLERY */
+
+.gallery {
+    display: block;
+}
+
+.grid-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 0 10px 10px;
+    gap: 10px;
+}
+
+.grid-item {
+    border: 5px solid black;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* EDITOR */
+
+.editor {
+    display: none;
+}
+
+.main-content {
+    border: black solid 2px;
+    flex-direction: row;
+}
+
+.editor-container {
+    width: 40vw;
+    height: 90vh;
+}
+
+.editor-tools {
+   height: 100%;
+   width: 100%;
+}
+
+.add-text {
+    height: 30px;
+    width: 30px;
+}
+
+#text {
+    padding: 4px;
+}
+
+/* HELPERS */
+
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+@media (max-width: 780px) {
+    .main-content {
+        border: black solid 2px;
+        flex-direction: column;
+    }
+    .editor {
+        width: 95vw;
+        height: 95vh;
+    }
+}
+
