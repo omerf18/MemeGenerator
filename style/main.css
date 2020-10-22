@@ -6,6 +6,7 @@
 
 body {
     margin: 0;
+    background-color: #ADB5BD;
 }
 
 .container {
@@ -15,11 +16,22 @@ body {
 /* SCREEN */
 
 .main-nav {
+    flex-direction: row;
+    display: block;
     height: 10vh;
-    background-color: black;
-    color: white;
+    background-color: #212529;
+    color: #e9ecef;
     padding-left: 10px;
     margin-bottom: 10px;
+    justify-content: space-evenly;
+}
+
+.phone {
+    display: block;
+}
+
+.phone-header {
+    display: none;
 }
 
 /* GALLERY */
@@ -38,7 +50,7 @@ body {
 }
 
 .grid-item {
-    border: 5px solid black;
+    border: 5px solid #212529;
 }
 
 img {
@@ -51,30 +63,45 @@ img {
 
 .editor {
     display: none;
+    margin-left: 10px;
 }
 
 .main-content {
-    border: black solid 2px;
     flex-direction: row;
+    margin: 0 auto;
 }
 
 .editor-container {
     width: 40vw;
     height: 90vh;
+    font-size: 20px;
+    margin: auto;
 }
 
 .editor-tools {
-   height: 100%;
-   width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
-.add-text {
-    height: 30px;
-    width: 30px;
+.icon {
+    height: 40px;
+    width: 40px;
+    margin: auto;
 }
 
 #text {
     padding: 4px;
+}
+
+/* FOOTER */
+
+.footer-nav {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 500;
+    background-color: #212529;
+    color: #e9ecef;
+    margin-top: 10px;
 }
 
 /* HELPERS */
@@ -97,12 +124,30 @@ img {
 
 @media (max-width: 780px) {
     .main-content {
-        border: black solid 2px;
         flex-direction: column;
+        align-items: center;
     }
     .editor {
-        width: 95vw;
-        height: 95vh;
+        width: 90vw;
+    }
+    #my-canvas {
+        margin: auto;
+        margin-bottom: 10px;
+        padding-left: 5px;
+        padding-bottom: 10px;
+    }
+
+    .phone {
+        display: none;
+    }
+
+    .phone-header {
+        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ADB5BD;
+        font-size: 20px;
+        padding: 10px;
     }
 }
-

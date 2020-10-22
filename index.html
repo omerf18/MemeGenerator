@@ -11,10 +11,14 @@
 <body onload=initGallery()>
 
     <header class="main-nav container flex align-center">
-        GALLERY
-        EDIT
+        <div class="btn phone" onclick="initGallery()"> GALLERY </div>
+        <div class="btn phone" onclick="renderBy('funny')"> FUNNY </div>
+        <div class="btn phone" onclick="renderBy('celeb')"> CELEBRITY </div>
+        <div class="btn phone" onclick="renderBy('animals')"> ANIMALS </div>
+        <div class="btn phone" onclick="renderBy('movie')"> MOVIE </div>
+        <div class="btn phone" onclick="initMyMemes()"> MY MEMES </div>
+        <div class="phone-header"> MEME GENERATOR </div>
     </header>
-
 
     <div class="gallery container">
 
@@ -24,14 +28,37 @@
 
     <div class="editor container flex justify-center align-center">
 
-        <content class="main-content flex align-center">
+        <content class="main-content flex">
 
             <canvas id="my-canvas" height="200" width="200"></canvas>
 
             <section class="edit-container">
                 <div class="edit-tools">
-                    <img class="add-text btn" onclick="onAddText()" src="icons/add.png">
-                    <input type="text" id="text" placeholder="Enter text">
+                    <div class="flex">
+                        <img class="add-text icon btn" onclick="onAddText()" src="icons/add.png">
+                        <input type="text" id="text" oninput="onInputChange(this.value)" placeholder="Enter text">
+                    </div>
+                    <div class="flex">
+                        <img class="font-dec icon btn" onclick="onSetFontSize('size-dec')"
+                            src="icons/decrease font - icon.png">
+                        <img class="font-inc icon btn" onclick="onSetFontSize('size-inc')"
+                            src="icons/increase font - icon.png">
+                    </div>
+                    <div class="flex">
+                        <img class="switch-lines icon btn" onclick="onSwitchLines()"
+                            src="icons/up-and-down-opposite-double-arrows-side-by-side.png">
+                    </div>
+                    <div class="flex">
+                        <input type="color" class="btn" id="fill-style" onchange="onPickFillStyle(this.value)"
+                            value="#FFFFFF">
+                        <img class="color-picker icon" src="icons/paint-board-and-brush.png">
+                        <input type="color" class="btn" id="stroke-style" onchange="onPickStrokeStyle(this.value)"
+                            value="#000000">
+                    </div>
+                </div>
+                <div class="flex">
+                    <img class="delete-text icon btn" onclick="onDeleteText()" src="icons/trash.png">
+                    <img class="save-meme icon btn" onclick="onSaveMemeToStorage()" src="icons/save.png">
                 </div>
             </section>
 
@@ -39,6 +66,10 @@
         </content>
 
     </div>
+
+    <footer class="footer-nav container flex justify-center align-center">
+        MEME GENERATOR 2020
+    </footer>
 
     <script src="js/utils.js"></script>
     <script src="js/data.js"></script>
