@@ -1,7 +1,5 @@
 'use strict'
 
-console.log('data');
-
 function getImgs() {
     return gImgs;
 }

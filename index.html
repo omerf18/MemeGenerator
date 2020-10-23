@@ -10,14 +10,24 @@
 
 <body onload=initGallery()>
 
+    <div class="side-nav-btn"> <span class="open-side-nav btn" onclick="toggleSideNav()"> ||| </span> MEME GENERATOR
+    </div>
+    <div class="side-nav" onclick="toggleSideNav()">
+        <div class="side-nav-item" onclick="initGallery(); selectNavItem(0)"> GALLERY </div>
+        <div class="side-nav-item" onclick="renderBy('funny'); selectNavItem(1)"> FUNNY </div>
+        <div class="side-nav-item" onclick="renderBy('celeb'); selectNavItem(2)"> CELEBRITY </div>
+        <div class="side-nav-item" onclick="renderBy('animals'); selectNavItem(3)"> ANIMALS </div>
+        <div class="side-nav-item" onclick="renderBy('movie'); selectNavItem(4)"> MOVIE </div>
+        <div class="side-nav-item" onclick="initMyMemes(); selectNavItem(5)"> MY MEMES </div>
+    </div>
+
     <header class="main-nav container flex align-center">
-        <div class="btn phone" onclick="initGallery()"> GALLERY </div>
-        <div class="btn phone" onclick="renderBy('funny')"> FUNNY </div>
-        <div class="btn phone" onclick="renderBy('celeb')"> CELEBRITY </div>
-        <div class="btn phone" onclick="renderBy('animals')"> ANIMALS </div>
-        <div class="btn phone" onclick="renderBy('movie')"> MOVIE </div>
-        <div class="btn phone" onclick="initMyMemes()"> MY MEMES </div>
-        <div class="phone-header"> MEME GENERATOR </div>
+        <div class="btn nav-item" onclick="initGallery(); selectNavItem(0)"> GALLERY </div>
+        <div class="btn nav-item" onclick="renderBy('funny'); selectNavItem(1)"> FUNNY </div>
+        <div class="btn nav-item" onclick="renderBy('celeb'); selectNavItem(2)"> CELEBRITY </div>
+        <div class="btn nav-item" onclick="renderBy('animals'); selectNavItem(3)"> ANIMALS </div>
+        <div class="btn nav-item" onclick="renderBy('movie'); selectNavItem(4)"> MOVIE </div>
+        <div class="btn nav-item" onclick="initMyMemes(); selectNavItem(5)"> MY MEMES </div>
     </header>
 
     <div class="gallery container">
@@ -34,32 +44,42 @@
 
             <section class="edit-container">
                 <div class="edit-tools">
-                    <div class="flex">
+                    <div class="margin-bottom">
                         <img class="add-text icon btn" onclick="onAddText()" src="icons/add.png">
-                        <input type="text" id="text" oninput="onInputChange(this.value)" placeholder="Enter text">
                     </div>
-                    <div class="flex">
+                    <div>
+                        <input type="text" class="margin-bottom" id="text" oninput="onInputChange(this.value)"
+                            placeholder="Enter text">
+                    </div>
+                    <div class="flex margin-bottom">
                         <img class="font-dec icon btn" onclick="onSetFontSize('size-dec')"
                             src="icons/decrease font - icon.png">
                         <img class="font-inc icon btn" onclick="onSetFontSize('size-inc')"
                             src="icons/increase font - icon.png">
+                        <img class='font-style icon btn' onclick="onSetFontStyle()" src="icons/text stroke.png">
                     </div>
-                    <div class="flex">
+                    <div class="flex margin-bottom">
                         <img class="switch-lines icon btn" onclick="onSwitchLines()"
                             src="icons/up-and-down-opposite-double-arrows-side-by-side.png">
                     </div>
-                    <div class="flex">
+                    <div class="flex margin-bottom">
                         <input type="color" class="btn" id="fill-style" onchange="onPickFillStyle(this.value)"
                             value="#FFFFFF">
                         <img class="color-picker icon" src="icons/paint-board-and-brush.png">
                         <input type="color" class="btn" id="stroke-style" onchange="onPickStrokeStyle(this.value)"
                             value="#000000">
                     </div>
-                </div>
-                <div class="flex">
-                    <img class="delete-text icon btn" onclick="onDeleteText()" src="icons/trash.png">
-                    <img class="save-meme icon btn" onclick="onSaveMemeToStorage()" src="icons/save.png">
-                </div>
+                    <div class="flex margin-bottom">
+                        <img class="delete-text icon btn" onclick="onDeleteText()" src="icons/trash.png">
+                        <img class="save-meme icon btn" onclick="onSaveMemeToStorage()" src="icons/save.png">
+                        <a href="#" class="download-meme btn icon" onclick="downloadImg(this)" download="my-meme.jpg">
+                        </a>
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button class="publish btn" type="submit">Publish</button>
+                        <div class="share-container facebook"></div>
+                    </form>
             </section>
 
 
@@ -71,9 +91,10 @@
         MEME GENERATOR 2020
     </footer>
 
-    
+
     <script src="js/utils.js"></script>
     <script src="js/data.js"></script>
+    <script src="js/upload-service.js"></script>
     <script src="js/canvas-service.js"></script>
     <script src="js/controller.js"></script>
 </body>

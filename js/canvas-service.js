@@ -1,6 +1,5 @@
 'use strict'
 
-console.log('canvas');
 const SAVED_MEMES_KEY = 'SAVED_MEMES';
 const gCanvas = document.getElementById('my-canvas');
 const gCtx = getCtx();
@@ -11,14 +10,18 @@ let gCurrTextSize = 20;
 let gCurrTextY = 10;
 let gFillStyleColor = '#FFFFFF';
 let gStrokeStyleColor = '#000000';
+let gCurrFontStyle = 'Impact';
+let gSelectedNavItemIdx = 0;
+
+function setGmeme(meme) {
+    gMeme = meme;
+}
 
 function addText(text, isNewTxtAdded) {
-    console.log('BEFORE', gMeme);
     let newLine = {
         txt: text,
         size: gCurrTextSize,
-        font: 'Impact',
-        align: 'left',
+        font: gCurrFontStyle,
         fillStyle: gFillStyleColor,
         strokeStyle: gStrokeStyleColor,
         x: 320,
@@ -32,10 +35,11 @@ function addText(text, isNewTxtAdded) {
         gCurrTextY += 10;
     }
     renderCanvas();
+    gMeme.content = gCanvas.toDataURL('image/jpeg');
 }
 
 function saveMemeToStorage() {
-    gSavedMemes.push(gMeme)
+    gSavedMemes.push(gMeme);
     saveToStorage(SAVED_MEMES_KEY, gSavedMemes);
 }
 
@@ -73,6 +77,7 @@ function getUserMeme(imgId) {
     });
     meme.id = imgs[selectedImgIdx].id;
     meme.url = imgs[selectedImgIdx].url;
+    meme.content = gCanvas.toDataURL('image/jpeg');
     meme.lines = [
         {
             txt: 'text',
@@ -96,6 +101,16 @@ function switchLines() {
     renderCanvas();
 }
 
+function setFontStyle() {
+    if (gCurrFontStyle === 'Impact') gCurrFontStyle = 'Lucida Console';
+    else if (gCurrFontStyle === 'Lucida Console') gCurrFontStyle = 'Times New Roman';
+    else if (gCurrFontStyle === 'Times New Roman') gCurrFontStyle = 'Comic Sans MS';
+    else gCurrFontStyle = 'Impact';
+    gMeme.lines[gCurrLineIdx].font = gCurrFontStyle;
+    renderCanvas();
+    console.log(gCurrFontStyle)
+}
+
 function setFontSize(newFontSize) {
     if (newFontSize === 'size-dec') {
         gCurrTextSize -= 2;
@@ -112,6 +127,7 @@ function setCurrMeme() {
     gCurrLineIdx = 0;
     gFillStyleColor = '#FFFFFF';
     gStrokeStyleColor = '#000000';
+    gCurrFontStyle = 'Impact';
 }
 
 function getCanvasImg(meme) {
@@ -163,4 +179,16 @@ function getSavedMemes() {
 
 function getMeme() {
     return gMeme;
+}
+
+function selectNavItem(idx) {
+    let navItems = document.querySelectorAll('.nav-item');
+    navItems[gSelectedNavItemIdx].classList.remove('nav-item-active');
+    navItems[idx].classList.add('nav-item-active');
+    gSelectedNavItemIdx = idx;
+}
+
+function toggleSideNav() {
+    let sideNav = document.querySelector('.side-nav');
+    sideNav.classList.toggle('show-side-nav');
 }

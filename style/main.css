@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    font-family: 'Comic Sans MS';
+}
+
 body {
     margin: 0;
     background-color: #ADB5BD;
@@ -14,6 +18,8 @@ body {
 }
 
 /* SCREEN */
+
+/* HEADER */
 
 .main-nav {
     flex-direction: row;
@@ -26,12 +32,30 @@ body {
     justify-content: space-evenly;
 }
 
-.phone {
-    display: block;
+.nav-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
-.phone-header {
+.nav-item-active {
+    border-bottom: #e9ecef 3px solid;
+}
+
+.side-nav-btn {
     display: none;
+    z-index: 2;
+}
+
+.side-nav {
+    width: 0;
+    transition: ease 0.2s;
+    overflow: hidden;
+    position: absolute;
+    background-color: #212529;
+    color: #e9ecef;
+    z-index: 1;
+    top: 58px;
 }
 
 /* GALLERY */
@@ -78,6 +102,14 @@ img {
     margin: auto;
 }
 
+.edit-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .editor-tools {
     height: 100%;
     width: 100%;
@@ -89,8 +121,53 @@ img {
     margin: auto;
 }
 
+.add-text {
+    margin-left: 60px;
+}
+
 #text {
     padding: 4px;
+}
+
+#fill-style {
+    height: 35px;
+}
+
+#stroke-style {
+    height: 35px;
+}
+
+.download-meme {
+    background-image: url('../icons/download.png');
+    background-size: cover;
+}
+
+.save-meme {
+    margin: 0 30px;
+}
+
+.facebook {
+    margin-left: 65px
+}
+
+.publish {
+    margin-left: 30px;
+    background-image: linear-gradient(to right, #4b6cb7 0%, #182848 51%, #4b6cb7 100%);
+    padding: 10px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+.publish:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
 }
 
 /* FOOTER */
@@ -122,6 +199,10 @@ img {
     cursor: pointer;
 }
 
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
 @media (max-width: 780px) {
     .main-content {
         flex-direction: column;
@@ -136,19 +217,26 @@ img {
         padding-left: 5px;
         padding-bottom: 10px;
     }
-
-    .phone {
+    .nav-item {
         display: none;
     }
-
-    .phone-header {
-        display: block;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ADB5BD;
-        font-size: 20px;
-        padding: 10px;
+    .show-side-nav {
+        width: 150px;
+        padding: 20px;
+        border: 2px solid #e9ecef;
     }
-    
+    .side-nav-btn {
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        color: #e9ecef;
+    }
+    .side-nav-item {
+        padding-top: 8px;
+        cursor: pointer;
+    }
+    .open-side-nav {
+        margin-right: 50px;
+    }
 }
