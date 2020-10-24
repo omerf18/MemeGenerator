@@ -43,20 +43,20 @@
             <canvas id="my-canvas" height="200" width="200"></canvas>
 
             <section class="edit-container">
-                <div class="edit-tools">
+                <div class="edit-tools flex justify-center align-center">
                     <div class="margin-bottom">
                         <img class="add-text icon btn" onclick="onAddText()" src="icons/add.png">
                     </div>
                     <div>
-                        <input type="text" class="margin-bottom" id="text" oninput="onInputChange(this.value)"
-                            placeholder="Enter text">
+                        <input type="text" class="main-input margin-bottom" id="text"
+                            oninput="onInputChange(this.value)" placeholder="Enter text">
                     </div>
                     <div class="flex margin-bottom">
                         <img class="font-dec icon btn" onclick="onSetFontSize('size-dec')"
                             src="icons/decrease font - icon.png">
+                        <img class='font-style icon btn' onclick="onSetFontStyle()" src="icons/text stroke.png">
                         <img class="font-inc icon btn" onclick="onSetFontSize('size-inc')"
                             src="icons/increase font - icon.png">
-                        <img class='font-style icon btn' onclick="onSetFontStyle()" src="icons/text stroke.png">
                     </div>
                     <div class="flex margin-bottom">
                         <img class="switch-lines icon btn" onclick="onSwitchLines()"

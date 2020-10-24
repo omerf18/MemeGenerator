@@ -111,8 +111,13 @@ img {
 }
 
 .editor-tools {
+    flex-direction: column;
     height: 100%;
     width: 100%;
+}
+
+.edit-tools {
+    flex-direction: column;
 }
 
 .icon {
@@ -121,12 +126,15 @@ img {
     margin: auto;
 }
 
-.add-text {
-    margin-left: 60px;
-}
-
 #text {
     padding: 4px;
+}
+
+input[type=text] {
+    border-radius: 20px;
+    height: 40px;
+    text-align: center;
+    background-color: #e0e0e0;
 }
 
 #fill-style {
@@ -146,12 +154,15 @@ img {
     margin: 0 30px;
 }
 
-.facebook {
-    margin-left: 65px
+.font-style {
+    margin: 0 15px;
+}
+
+.color-picker {
+    margin: 0 30px;
 }
 
 .publish {
-    margin-left: 30px;
     background-image: linear-gradient(to right, #4b6cb7 0%, #182848 51%, #4b6cb7 100%);
     padding: 10px 30px;
     text-align: center;
@@ -168,6 +179,11 @@ img {
     background-position: right center;
     color: #fff;
     text-decoration: none;
+}
+
+.facebook {
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
 /* FOOTER */
