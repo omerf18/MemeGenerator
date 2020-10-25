@@ -50,24 +50,33 @@ function renderCanvas() {
     }
 }
 
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderCanvas);
+}
+
+
 function onSaveMemeToStorage() {
     saveMemeToStorage();
 }
 
 function onPickFillStyle(color) {
     fillStyle(color);
+    renderCanvas();
 }
 
 function onPickStrokeStyle(color) {
     strokeStyle(color);
+    renderCanvas();
 }
 
 function onSwitchLines() {
     switchLines();
+    renderCanvas();
 }
 
 function onDeleteText() {
     deleteText();
+    renderCanvas();
 }
 
 function onInputChange(text) {
@@ -77,6 +86,7 @@ function onInputChange(text) {
 
 function onSetFontSize(newFontSize) {
     setFontSize(newFontSize);
+    renderCanvas();
 }
 
 function downloadImg(elLink) {
@@ -86,6 +96,7 @@ function downloadImg(elLink) {
 
 function onSetFontStyle() {
     setFontStyle()
+    renderCanvas();
 }
 
 function onAddText() {
@@ -93,12 +104,23 @@ function onAddText() {
     if (elInput.value === '') return;
     addText(elInput.value, true);
     document.querySelector('#text').value = '';
+    renderCanvas();
 }
 
 function onSelectImg(imgId) {
     let meme = getUserMeme(imgId);
     initEditor(meme);
     showCanvas();
+}
+
+function showGallery() {
+    document.querySelector('.gallery').style.display = 'block';
+    document.querySelector('.editor').style.display = 'none';
+}
+
+function showCanvas() {
+    document.querySelector('.gallery').style.display = 'none';
+    document.querySelector('.editor').style.display = 'block';
 }
 
 function renderAllGallery() {
@@ -121,6 +143,7 @@ function onSelectMeme(memeId) {
     setGmeme(meme);
     let canvas = getCanvas();
     resizeCanvas();
+    renderCanvas();
     window.addEventListener('resize', resizeCanvas, false);
     let ctx = getCtx();
     let img = new Image();
@@ -131,6 +154,11 @@ function onSelectMeme(memeId) {
     showCanvas();
 }
 
+function onDeleteMyMeme(memeId) {
+    deleteMyMeme(memeId);
+    renderMyMemes();
+}
+
 function renderMyMemes() {
     const memes = loadSavedMemes();
     const elGridContainer = document.querySelector('.grid-container');
@@ -138,7 +166,12 @@ function renderMyMemes() {
     memes.forEach(meme => {
         strHTML +=
             `
-        <div class="btn"> <img class="grid-item" id="img-${meme.id}" onclick="onSelectMeme('${meme.id}')" src="${meme.content}" > </div>
+        <div class="relative"> <img class="saved-meme-img grid-item" id="img-${meme.id}" src="${meme.content}" > 
+        <div class="saved-memes-opts flex">
+         <button class="saved-memes-share saved-memes-btn btn" onclick="onSelectMeme('${meme.id}')"> Edit </button>
+         <button class="saved-memes-delete saved-memes-btn btn" onclick="onDeleteMyMeme('${meme.id}')"> Delete </button> 
+        </div>
+        </div>
           `
     });
     elGridContainer.innerHTML = strHTML;

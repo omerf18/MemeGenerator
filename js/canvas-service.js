@@ -34,8 +34,16 @@ function addText(text, isNewTxtAdded) {
         document.querySelector('#text').value = '';
         gCurrTextY += 10;
     }
-    renderCanvas();
+
     gMeme.content = gCanvas.toDataURL('image/jpeg');
+}
+
+function deleteMyMeme(memeId) {
+    let savedMemes = loadFromStorage(SAVED_MEMES_KEY);
+    const currMemeIdx = savedMemes.findIndex(savedMeme => savedMeme.id === memeId);
+    savedMemes.splice(currMemeIdx, 1);
+    gSavedMemes = savedMemes;
+    saveToStorage(SAVED_MEMES_KEY, gSavedMemes)
 }
 
 function saveMemeToStorage() {
@@ -46,27 +54,15 @@ function saveMemeToStorage() {
 function fillStyle(color) {
     gFillStyleColor = color;
     gMeme.lines[gCurrLineIdx].fillStyle = color;
-    renderCanvas();
 }
 
 function strokeStyle(color) {
     gStrokeStyleColor = color;
     gMeme.lines[gCurrLineIdx].strokeStyle = color;
-    renderCanvas();
 }
 
 function applyInputChange(text) {
     addText(text, false);
-}
-
-function showGallery() {
-    document.querySelector('.gallery').style.display = 'block';
-    document.querySelector('.editor').style.display = 'none';
-}
-
-function showCanvas() {
-    document.querySelector('.gallery').style.display = 'none';
-    document.querySelector('.editor').style.display = 'block';
 }
 
 function getUserMeme(imgId) {
@@ -98,7 +94,6 @@ function switchLines() {
     gCurrTextY += 10;
     if (gCurrTextY === 100) gCurrTextY = 10;
     gMeme.lines[gCurrLineIdx].y = gCanvas.height * gCurrTextY / 100;
-    renderCanvas();
 }
 
 function setFontStyle() {
@@ -107,8 +102,6 @@ function setFontStyle() {
     else if (gCurrFontStyle === 'Times New Roman') gCurrFontStyle = 'Comic Sans MS';
     else gCurrFontStyle = 'Impact';
     gMeme.lines[gCurrLineIdx].font = gCurrFontStyle;
-    renderCanvas();
-    console.log(gCurrFontStyle)
 }
 
 function setFontSize(newFontSize) {
@@ -118,7 +111,6 @@ function setFontSize(newFontSize) {
         gCurrTextSize += 2;
     }
     gMeme.lines[gCurrLineIdx].size = gCurrTextSize;
-    renderCanvas();
 }
 
 function setCurrMeme() {
@@ -145,7 +137,6 @@ function getCanvas() {
 function deleteText() {
     gMeme.lines.pop();
     gCurrLineIdx = gMeme.lines.length;
-    renderCanvas();
 }
 
 function resizeCanvas() {
@@ -157,7 +148,6 @@ function resizeCanvas() {
         canvas.width = window.innerWidth * 90 / 100;
         canvas.height = (window.innerHeight * 55) / 100;
     }
-    renderCanvas();
 }
 
 function getCtx() {
